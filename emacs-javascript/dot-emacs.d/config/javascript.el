@@ -47,7 +47,6 @@
        (message "Sent page reload command"))
 
      (when (featurep 'tide)
-       (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
        (add-hook 'js2-mode-hook
                  (lambda ()
                    (when (or (locate-dominating-file default-directory "jsconfig.json")
