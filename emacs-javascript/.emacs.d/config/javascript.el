@@ -6,9 +6,6 @@
 
 (add-hook 'js2-mode-hook
           (lambda()
-            ;; Add flyspell for JavaScript comments
-            (flyspell-prog-mode)
-
             ;; Set up js2-refactor bindings if package is installed
             (when (featurep 'js2-refactor)
               (js2r-add-keybindings-with-prefix "C-c"))
@@ -30,8 +27,12 @@
 
      ;; Adapt to airbnb javascript style guide (https://github.com/airbnb/javascript)
      (setq js-switch-indent-offset js-indent-level)
+     (setq js2-strict-trailing-comma-warning nil)
      (advice-add 'js--multi-line-declaration-indentation :around (lambda (orig-fun &rest args) nil))
-     
+
+     ;; Add flyspell for JavaScript comments
+     (add-hook 'js2-mode-hook 'flyspell-prog-mode)
+
      ;; Setup js doc triggers
      (when (featurep 'js-doc)
        (define-key js2-mode-map (kbd "C-c d") 'js-doc-insert-function-doc)
@@ -45,6 +46,10 @@
        (interactive)
        (skewer-eval "window.parent.location.reload()")
        (message "Sent page reload command"))
+
+     ;; Enable flycheck when available
+     (when (featurep 'flycheck)
+       (add-hook 'js2-mode-hook 'flycheck-mode))
 
      (when (featurep 'tide)
        (add-hook 'js2-mode-hook
