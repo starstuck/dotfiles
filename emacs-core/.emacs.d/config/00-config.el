@@ -83,7 +83,7 @@
 ;(setq-default css-indent-offset 4)
 
 ;; Do not truncate long lines
-(setq default-truncate-lines t)
+(setq-default truncate-lines t)
 
 ;; Highlight matching branckets
 (show-paren-mode 1)

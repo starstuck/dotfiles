@@ -25,7 +25,7 @@
      (require 'js2-refactor nil t)
      (require 'expand-region nil t)
      (require 'skewer-mode nil t)
-     (require 'flycheck nit t)
+     (require 'flycheck nil t)
      (require 'tide nil t)
 
      ;; Adapt to airbnb javascript style guide (https://github.com/airbnb/javascript)
