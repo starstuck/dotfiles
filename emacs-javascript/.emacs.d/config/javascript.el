@@ -31,6 +31,9 @@
      (setq js2-strict-trailing-comma-warning nil)
      (advice-add 'js--multi-line-declaration-indentation :around (lambda (orig-fun &rest args) nil))
 
+     ;; Add additional extensions to speedbar (.js seems to be working out of the box)
+     (speedbar-add-supported-extension ".mjs")
+
      ;; Add flyspell for JavaScript comments
      (add-hook 'js2-mode-hook 'flyspell-prog-mode)
 
