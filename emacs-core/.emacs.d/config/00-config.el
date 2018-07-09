@@ -81,7 +81,11 @@
 (setq-default nxml-child-indent 2)
 ;(setq-default css-indent-offset 4)
 
-;; Do not truncate long lines
+;; Set default fill column to 100
+(setq-default fill-column 100)
+(setq fci-rule-color "gray10")
+
+;; Do not truncate long lines by default
 (setq-default truncate-lines t)
 
 ;; Highlight matching branckets
