@@ -4,4 +4,4 @@
             (speedbar-add-supported-extension "\\.md")
             (speedbar-add-supported-extension "\\.sh")
             (speedbar-add-supported-extension "\\.sql")
-            (Speedbar-add-supported-extension "\\.xml")))
+            (speedbar-add-supported-extension "\\.xml")))
