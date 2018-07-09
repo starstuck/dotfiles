@@ -15,9 +15,14 @@
             (when (featurep 'skewer-mode)
               (skewer-mode 1))))
 
+;; Add additional extensions to speedbar (.js seems to be working out of the box)
+(eval-after-load 'speedbar-load-hook
+  (lambda ()
+    (speedbar-add-supported-extension ".mjs")))
+
 ;; Try loading optional extension modules
 (eval-after-load "js2-mode"
-  '(progn
+  '(progn ()
      (require 'js-doc nil t)
      (require 'speedbar nil t)
      (require 'js2-refactor nil t)
@@ -30,9 +35,6 @@
      (setq js-switch-indent-offset js-indent-level)
      (setq js2-strict-trailing-comma-warning nil)
      (advice-add 'js--multi-line-declaration-indentation :around (lambda (orig-fun &rest args) nil))
-
-     ;; Add additional extensions to speedbar (.js seems to be working out of the box)
-     (speedbar-add-supported-extension ".mjs")
 
      ;; Add flyspell for JavaScript comments
      (add-hook 'js2-mode-hook 'flyspell-prog-mode)
