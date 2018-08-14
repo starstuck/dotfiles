@@ -1,0 +1,47 @@
+[include]
+    path = .gitconfig_local
+[core]
+    excludesfile = ~/.gitignore_global
+    whitespace = trailing-space,space-before-tab,tabwidth=4
+	pager = less -FX -x4
+[merge]
+    tool = meld
+[push]
+    default = tracking
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+    ui = auto
+[diff]
+    renames = copies
+    mnemonicprefix = true
+[advice]
+    pushNonFastForward = false
+    statusHints = false
+[branch]
+    autosetupmerge = true
+[rerere]
+    enabled = true
+[alias]
+    tip = log -n 1
+    outgoing = log HEAD..origin/master
+    incoming = log origin/master..HEAD
+    serve = daemon --reuseaddr --base-path=. --export-all --verbose --enable=receive-pack
+    st = status
+    co = checkout
+    ci = commit
+    lp = log -p
+    sglog = log --date=\"short\" --format=\"%C(yellow)%h%Creset [%cN] %C(white)%ad%Creset %s\" --graph --decorate
+    filelog = log --oneline --no-merges --
+    unstage = reset HEAD
+    diffall = diff HEAD
+    diffst = diff --staged
+    ign = ls-files -o -i --exclude-standard
+    undo = reset --hard HEAD
+    alias = config --get-regexp '^alias\\.'
+[receive]
+    denyCurrentBranch = ignore
+[deamon]
+    receivepack = true
+    uploadarch = true
