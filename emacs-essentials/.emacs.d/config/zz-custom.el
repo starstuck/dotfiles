@@ -11,7 +11,7 @@
  '(case-fold-search t)
  '(column-number-mode t)
  '(custom-enabled-themes (quote (deeper-blue)))
- '(custom-file "~/usr/etc/emacs.d/zz-custom.el")
+ '(custom-file "~/.emacs.d/config/zz-custom.el")
  '(custom-safe-themes
    (quote
     ("82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
