@@ -1,0 +1,30 @@
+# -*- sh -*-
+USER_COMPLETION_DIR="${HOME}/.bash_completion.d"
+
+load_completion()
+{
+    local COMPLETION_DIR="$1"
+    for i in $(LC_ALL=C command ls "$COMPLETION_DIR"); do
+        [[ (! ${i##*/} =~ (^\.#|\.(bak|swp)$) ) \
+            && -f $COMPLETION_DIR/$i \
+			&& -n $(which $i 2>/dev/null) ]] && . "$COMPLETION_DIR/$i"
+    done
+}
+
+# Load user completion scripts, but only if utility exists
+if [ -d "$USER_COMPLETION_DIR" ]; then
+    for i in $(LC_ALL=C command ls "$USER_COMPLETION_DIR"); do
+        [[ (! ${i##*/} =~ (^\.#|\.(bak|swp)$) ) \
+            && -f $USER_COMPLETION_DIR/$i \
+			&& -n $(which ${i%%-completion*} 2>/dev/null) ]] && . "$USER_COMPLETION_DIR/$i"
+    done
+fi
+
+unset i
+unset USER_COMPLETION_DIR
+
+# Autocompletion for pass and locker
+function _pass_plain { PASSWORD_STORE_DIR=~/.password-store _pass "$@"; }
+function _pass_locker { PASSWORD_STORE_DIR=~/.locker-store _pass "$@"; }
+complete -o filenames -o nospace -F _pass_plain pass
+complete -o filenames -o nospace -F _pass_locker locker

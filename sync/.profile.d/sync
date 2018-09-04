@@ -1,0 +1,5 @@
+# -*- mode: sh -*-
+
+if [ -f $HOME/Sync/Library/Config/profile ]; then
+    . $HOME/Sync/Library/Config/profile
+fi

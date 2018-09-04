@@ -1,0 +1,122 @@
+# -*- mode: sh -*-
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Set color switch aliases
+NCOLS=$(tput colors)
+if [ -n "$NCOLS" -a $NCOLS -ge 8 ]; then
+    NORMAL="$(tput sgr0)"
+    BOLD="$(tput bold)"
+    BLACK="$(tput setaf 0)"
+    RED="$(tput setaf 1)"
+    GREEN="$(tput setaf 2)"
+    YELLOW="$(tput setaf 3)"
+    BLUE="$(tput setaf 4)"
+    MAGENTA="$(tput setaf 5)"
+    CYAN="$(tput setaf 6)"
+    WHITE="$(tput setaf 7)"
+fi
+
+# Setup constant parts of prompt
+if [ -z "$SSH_CLIENT" ]; then
+    HOSTCLR="${BOLD}${GREEN}"
+else
+    HOSTCLR="${BOLD}${CYAN}"
+fi
+if [ $(id -u) == 0 ]; then
+    PS_PREFIX="${BOLD}${RED}\u${HOSTCLR}"
+else
+    PS_PREFIX="${HOSTCLR}\u"
+fi
+PS_PREFIX="${PS_PREFIX}@\h${NORMAL}:${BOLD}${BLUE}\w"
+PS_SUFFIX="${NORMAL}\n\$ "
+
+# If this is an xterm set the window title to user@host:dir
+if [[ "$TERM" =~ xterm.*|rxvt.* ]]; then
+    PS_PREFIX="\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a${PS_PREFIX}"
+fi
+
+
+EXTRST="${MAGENTA}" # Default extra info colour
+EXTIND=":"      # Suffix after extratype identifier
+EXTSTATNEW="[?]"   # Status suffix for branches without local changes, but win untracked files
+EXTSTATCHG="[!]"   # Status suffix for branches wit local changes
+
+
+function _scm_prompt() {
+    local type="$1"
+    local branch="$2"
+    local status="$3"
+    if [ "$branch" == "master" ]; then
+        branch="${BOLD}${GREEN}${branch}"
+    else
+        branch="${BOLD}${YELLOW}${branch}"
+    fi
+    if [ -n "$status" ]; then
+        status="${BOLD}${RED}${status}"
+    fi
+    echo -n "${type}${EXTIND}${branch}${status}"
+
+}
+
+function _is_scm_supported() {
+	local cmd="$1"
+	$(df -l .. >/dev/null 2>&1)
+	[[ $? && ( -z $(which git 2>/dev/null) ) ]]
+	return $?
+}
+
+function _git_prompt() {
+	if _is_scm_supported "git"; then
+		return 0
+	fi
+    local git_status="`git status -unormal 2>&1`"
+    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+        if [[ "$git_status" =~ nothing\ to\ commit ]]; then
+            local status=''
+        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
+            local status=${EXTSTATNEW}
+        else
+            local status=${EXTSTATCHG}
+        fi
+        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
+            branch=${BASH_REMATCH[1]}
+        else
+            # Detached HEAD.  (branch=HEAD is a faster alternative.)
+            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null || echo HEAD`)"
+        fi
+        _scm_prompt "git" $branch $status
+    fi
+}
+
+function _hg_prompt() {
+	if _is_scm_supported "hg"; then
+		return 0
+	fi
+    local branch=$(hg branch 2>/dev/null)
+    if [ -n "${branch}" ]; then
+        local status=$(hg status --no-color 2> /dev/null \
+            | awk '$1 == "?" { print "${EXTSTATNEW}" } $1 != "?" { print "${EXTSTATCHG}" }' \
+            | sort | uniq | head -c1)
+        _scm_prompt "hg" $branch $status
+    fi
+}
+
+function _prompt() {
+    ps_extra=(${debian_chroot:+"chroot${EXTIND}${BOLD}${RED}$debian_chroot$"} $(_git_prompt) $(_hg_prompt))
+    if [ -n "$ps_extra" ]; then
+        PS1="${PS_PREFIX}$(printf " ${EXTRST}%s" "${ps_extra[@]}")${PS_SUFFIX}"
+    else
+        PS1="${PS_PREFIX}${PS_SUFFIX}"
+    fi
+	export PS1
+}
+
+if [ "$(uname -o 2>/dev/null)" == "Cygwin" ]; then
+    export PS1="${PS_PREFIX}${PS_SUFFIX}"
+else
+    PROMPT_COMMAND="_prompt"
+fi
