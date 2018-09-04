@@ -45,7 +45,6 @@ BASHRCDIR="${HOME}/.bashrc.d"
 if [ -d "${BASHRCDIR}" ]; then
     for F in ${BASHRCDIR}/*; do
         if [ -f "${F}" ]; then
-            echo "Loading: $F"
             . $F
         fi
     done

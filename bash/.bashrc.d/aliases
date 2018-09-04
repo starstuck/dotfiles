@@ -35,6 +35,3 @@ case "$TERM" in
 		fi
     ;;
 esac
-
-# Alias to locker command
-alias locker="PASSWORD_STORE_DIR=~/.locker-store pass"

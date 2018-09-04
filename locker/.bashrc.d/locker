@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+
+# Alias to locker command
+alias locker="PASSWORD_STORE_DIR=~/.locker-store pass"
+
+# Autocompletion for pass and locker
+function _pass_plain { PASSWORD_STORE_DIR=~/.password-store _pass "$@"; }
+function _pass_locker { PASSWORD_STORE_DIR=~/.locker-store _pass "$@"; }
+complete -o filenames -o nospace -F _pass_plain pass
+complete -o filenames -o nospace -F _pass_locker locker
