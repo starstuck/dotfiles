@@ -45,3 +45,5 @@
 [deamon]
     receivepack = true
     uploadarch = true
+[user]
+	name = Tomasz Szarstuk
