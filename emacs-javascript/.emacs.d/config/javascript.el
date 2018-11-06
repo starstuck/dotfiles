@@ -31,10 +31,13 @@
      (require 'flycheck nil t)
      (require 'tide nil t)
 
-     ;; Adapt to airbnb javascript style guide (https://github.com/airbnb/javascript)
+     ;; Relax syntax checker for airbnb javascript style
      (setq js-switch-indent-offset js-indent-level)
      (setq js2-strict-trailing-comma-warning nil)
      (advice-add 'js--multi-line-declaration-indentation :around (lambda (orig-fun &rest args) nil))
+
+     ;; Relax syntax checker for standard javascript style
+     (setq js2-strict-missing-semi-warning nil)
 
      ;; Add flyspell for JavaScript comments
      (add-hook 'js2-mode-hook 'flyspell-prog-mode)
