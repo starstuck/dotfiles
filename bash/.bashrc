@@ -14,7 +14,7 @@ export HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=100000
+HISTSIZE=-1
 HISTFILESIZE=1000000
 
 # check the window size after each command and, if necessary,
