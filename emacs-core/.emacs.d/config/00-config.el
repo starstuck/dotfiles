@@ -7,8 +7,9 @@
 (set-frame-parameter (selected-frame) 'alpha '(85 85))
 (add-to-list 'default-frame-alist '(alpha 85 85))
 
-;; For some strange reason following command is crashing emacs in deaon mode on OS X
 (add-to-list 'default-frame-alist '(font . "Anonymous Pro-14"))
+; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 ;; Enable syntax higlighting, XEmacs has it by default
 (global-font-lock-mode t)
