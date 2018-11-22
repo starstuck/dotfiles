@@ -73,14 +73,15 @@
 (setq tab-stop-list (number-sequence 4 120 4)) 
 ;; Use spaces for indention
 (setq-default indent-tabs-mode nil)
-;; Override default indention in differnt modes
-(setq-default c-basic-offset 4)
-(setq-default cperl-indent-level 4)
-;; Some modes are better off with other indention
+;; Use 2 spaces in all c style languages
+(setq-default c-basic-offset 2)
+(setq-default sh-basic-offset 2)
 (setq-default js-indent-level 2)
+(setq-default css-indent-offset 2)
+;; Also use 2 spaces in markup languages
 (setq-default sgml-basic-offset 2)
 (setq-default nxml-child-indent 2)
-;(setq-default css-indent-offset 4)
+
 
 ;; Set default fill column to 100
 (setq-default fill-column 100)
