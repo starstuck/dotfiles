@@ -6,3 +6,4 @@
 TAGS
 .ensime
 .ensime_cache
+.dir-locals.el
