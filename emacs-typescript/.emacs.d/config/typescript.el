@@ -3,7 +3,7 @@
      (require 'flycheck nil t)
      (require 'tide nit t)
 
-     (setq-default typescript-ident-level 2)
+     (setq-default typescript-indent-level 2)
 
      (when (featurep 'flycheck)
        (add-hook 'typescript-mode-hook 'flycheck-mode))
