@@ -4,9 +4,9 @@ My dotfiles for MacOS / Linux / MSys2
 
 ## Usage
 
-It is best to use with stow
+It is best to use with stow. There is one budled in.
 
 ```
 cd ~/.dotfiles
-stow -Sv <package-name>
+.bin/stow -Sv <package-name>
 ```
