@@ -13,14 +13,17 @@ cd ~/.dotfiles
 
 ## Notes on running it on WIndows
 
-Stow depends havilly on symlinks. You can ask msys to use windows native links.
-Just add to your profile.
+Stow depends relative symlinks, which are disabled in MSYS by default. You can ask msys to use windows native links by setting environment variable:
 
 ```
 export MSYS=winsymlinks:nativestrict
 ```
 
-This may require some extra permissions on Windows 7
+Anfortuantely this will require some additional permissions on Windows 7. If you can't extend your user policy to allow for symlinks, you can use MYS workaround, that uses `.lnk` files instead. Unfortunatelly this will only work with Cygwrin, Msys and Mingw programms.
+
+```
+export MSYS=winsymlinks:lnk
+```
 
 ## Fonts on Mac
 
