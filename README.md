@@ -4,7 +4,7 @@ My dotfiles for MacOS / Linux / MSys2
 
 ## Usage
 
-It is best to use with stow. There is one budled in.
+My dotfiles repo is designed to be used with `stow`. I have bundled one in for convenience.
 
 ```
 cd ~/.dotfiles
