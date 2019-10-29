@@ -1,0 +1,22 @@
+# -*- mode: sh; -*-
+
+WORKSPACE=${WORKSPACE:-~/wsp}
+
+cw()
+{
+  cd "${WORKSPACE}/$1"
+}
+
+_cw_completions()
+{
+  COMPREPLY=()
+  local k=0
+  local j
+  for j in $( compgen -d "${WORKSPACE}/$2" )
+  do
+    [ -d "${j}/.git" ] && j="${j} " || j="${j}/"
+    COMPREPLY[k++]="${j#${WORKSPACE}/}"
+  done
+}
+
+complete -F _cw_completions -o nospace cw
