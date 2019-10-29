@@ -3,7 +3,7 @@
 <plist version="1.0">
  <dict>
   <key>Label</key>
-  <string>net.szarsti.bash_profile</string>
+  <string>net.starstuck.bash_profile</string>
   <key>RunAtLoad</key>
   <true/>
   <key>LaunchOnlyOnce</key>
