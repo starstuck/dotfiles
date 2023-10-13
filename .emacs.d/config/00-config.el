@@ -4,12 +4,11 @@
 
 ;; Enable transparency
 ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
-(set-frame-parameter (selected-frame) 'alpha '(85 85))
-(add-to-list 'default-frame-alist '(alpha 85 85))
+;;(set-frame-parameter (selected-frame) 'alpha '(85 85))
+;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
-(add-to-list 'default-frame-alist '(font . "Anonymous Pro-14"))
 ; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
+;(add-to-list 'default-frame-alist '(ns-appearance . dark))
 
 ;; Enable syntax higlighting, XEmacs has it by default
 (global-font-lock-mode t)
