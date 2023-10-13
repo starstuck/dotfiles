@@ -17,18 +17,18 @@
                    ;; Recurse for rest of elements.
                    (mapcar 'cdr args)))))
 
-(when (file-exists-p "/bin/launchctl")
-  (let* ((vars '("PATH" "SSH_AUTH_SOCK" "EMAIL"))
-         (vals (split-string
-                (shell-command-to-string
-                 (format "for V in %s; do /bin/launchctl getenv $V; done"
-                         (mapconcat 'identity vars " ")))))
-         ; Below is safer variant that does not work on emacs 22
-         ;(vals (split-string-and-unquote
-         ;       (shell-command-to-string
-         ;        (format "bash -l -c 'echo -n \\\"$%s\\\"'"
-         ;                (combine-and-quote-strings vars "\\\" \\\"$")))))
-         (path (car vals)))
-    (setq exec-path
-          (append (split-string path ":") exec-path))
-    (mapcar* #'setenv vars vals)))
+;(when (file-exists-p "/bin/launchctl")
+;  (let* ((vars '("PATH" "SSH_AUTH_SOCK" "EMAIL"))
+;         (vals (split-string
+;                (shell-command-to-string
+;                 (format "for V in %s; do /bin/launchctl getenv $V; done"
+;                         (mapconcat 'identity vars " ")))))
+;         ; Below is safer variant that does not work on emacs 22
+;         ;(vals (split-string-and-unquote
+;         ;       (shell-command-to-string
+;         ;        (format "bash -l -c 'echo -n \\\"$%s\\\"'"
+;         ;                (combine-and-quote-strings vars "\\\" \\\"$")))))
+;         (path (car vals)))
+;    (setq exec-path
+;          (append (split-string path ":") exec-path))
+;    (mapcar* #'setenv vars vals)))

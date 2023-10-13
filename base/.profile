@@ -14,6 +14,8 @@ fi
 
 # Load brew installed profiles if available
 if [[ $(which brew 2>/dev/null) && -d $(brew --prefix)/etc/profile.d ]]; then
+    # Recently brew has starter using usr/local/sbin folder which is not in MacOS default path
+    export PATH="$PATH:/usr/local/sbin"
     for i in $(brew --prefix)/etc/profile.d/*.sh; do
     if [ -r $i ]; then
       . $i
