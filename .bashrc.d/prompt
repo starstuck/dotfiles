@@ -1,0 +1,55 @@
+# -*- mode: sh -*-
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Set color switch aliases
+NCOLS=$(tput colors)
+if [ -n "$NCOLS" -a $NCOLS -ge 8 ]; then
+    NORMAL="$(tput sgr0)"
+    BOLD="$(tput bold)"
+    BLACK="$(tput setaf 0)"
+    RED="$(tput setaf 1)"
+    GREEN="$(tput setaf 2)"
+    YELLOW="$(tput setaf 3)"
+    BLUE="$(tput setaf 4)"
+    MAGENTA="$(tput setaf 5)"
+    CYAN="$(tput setaf 6)"
+    WHITE="$(tput setaf 7)"
+fi
+
+# Setup constant parts of prompt
+if [ -z "$SSH_CLIENT" ]; then
+    HOSTCLR="${BOLD}${GREEN}"
+else
+    HOSTCLR="${BOLD}${CYAN}"
+fi
+if [ $(id -u) == 0 ]; then
+    PS_PREFIX="${BOLD}${RED}\u${HOSTCLR}"
+else
+    PS_PREFIX="${HOSTCLR}\u"
+fi
+PS_PREFIX="${PS_PREFIX}@\h${NORMAL}:${BOLD}${BLUE}\w${NORMAL}"
+PS_SUFFIX="\n\$ "
+
+# If this is an xterm set the window title to user@host:dir
+if [[ "$TERM" =~ xterm.*|rxvt.* ]]; then
+    PS_PREFIX="\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a${PS_PREFIX}"
+fi
+
+# Use git prompt if it is avaialble
+if [ "$(type -t __git_ps1)" == "function" ]; then
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    GIT_PS1_SHOWUPSTREAM=1
+    GIT_PS1_SHOWCOLORHINTS=1
+    if [ "$(uname -o 2>/dev/null)" == "Cygwin" ]; then
+        export PS1="${PS_PREFIX}$(__git_ps1)${PS_SUFFIX}"
+    else
+        PROMPT_COMMAND='__git_ps1 "${PS_PREFIX}" "${PS_SUFFIX}"'
+    fi
+else
+    export PS1="${PS_PREFIX}${PS_SUFFIX}"
+fi

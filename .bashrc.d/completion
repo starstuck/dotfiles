@@ -1,0 +1,24 @@
+# -*- sh -*-
+USER_COMPLETION_DIR="${HOME}/.bash_completion.d"
+
+load_completion()
+{
+    local COMPLETION_DIR="$1"
+    for i in $(LC_ALL=C command ls "$COMPLETION_DIR"); do
+        [[ (! ${i##*/} =~ (^\.#|\.(bak|swp)$) ) \
+            && -f $COMPLETION_DIR/$i \
+			&& -n $(which $i 2>/dev/null) ]] && . "$COMPLETION_DIR/$i"
+    done
+}
+
+# Load user completion scripts, but only if utility exists
+if [ -d "$USER_COMPLETION_DIR" ]; then
+    for i in $(LC_ALL=C command ls "$USER_COMPLETION_DIR"); do
+        [[ (! ${i##*/} =~ (^\.#|\.(bak|swp)$) ) \
+            && -f $USER_COMPLETION_DIR/$i \
+			&& -n $(which ${i%%-completion*} 2>/dev/null) ]] && . "$USER_COMPLETION_DIR/$i"
+    done
+fi
+
+unset i
+unset USER_COMPLETION_DIR

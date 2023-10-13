@@ -1,0 +1,38 @@
+[user]
+	name = Tom (starstuck)
+	email = tom@starstuck.uk
+[core]
+	excludesfile = ~/.gitignore_global
+	whitespace = trailing-space,space-before-tab,tabwidth=4
+	pager = less -FX -x4
+[push]
+	default = tracking
+[color]
+	branch = auto
+ 	diff = auto
+	status = auto
+	ui = auto
+[diff]
+	renames = copies
+	mnemonicprefix = true
+[advice]
+	pushNonFastForward = false
+	statusHints = false
+[branch]
+	autosetupmerge = true
+[rerere]
+	enabled = true
+[alias]
+	tip = log -n 1
+	outgoing = log HEAD..origin/master
+	incoming = log origin/master..HEAD
+	st = status
+	co = checkout
+	ci = commit
+	lp = log -p
+	ign = ls-files -o -i --exclude-standard
+	alias = config --get-regexp '^alias\\.'
+[receive]
+	denyCurrentBranch = ignore
+[include]
+	path = .gitconfig_local
