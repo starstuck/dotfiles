@@ -1,6 +1,6 @@
 # -*- mode: sh; -*-
 
-WORKSPACE=${WORKSPACE:-~/wsp}
+WORKSPACE=${WORKSPACE:-~/Developer}
 
 cw()
 {
