@@ -10,28 +10,10 @@ alias gless='grep -d recurse --include "*.less" . -e'
 alias gjs='grep -d recurse --include "*.js" . -e'
 alias gpy='grep -d recurse --include "*.py" . -e'
 alias gxml='grep -d recurse --include "*.xml" . -e'
-alias gftl='grep -d recurse --include "*.ftl" . -e'
 
 # Installed applications short aliases
-type emacsclient 1>/dev/null 2>/dev/null &&
-    alias ec=emacsclient
+alias ec=emacsclient
 
-# enable colour in standard tools
-case "$TERM" in
-    xterm|xterm-color)
-
-        # enable color support of ls and also add handy aliases
-        if [ -x /usr/bin/dircolors ]; then
-            test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-            alias ls='ls --color=auto'
-		elif [ -n $(sysctl -n kern.osrelease 2>/dev/null) ]; then
-			alias ls='ls -G' # OS X
-		fi
-
-		if [ "$(uname)" = "Linux" ]; then
-			alias grep='grep --color=auto'
-			alias fgrep='fgrep --color=auto'
-			alias egrep='egrep --color=auto'
-		fi
-    ;;
-esac
+# For now dotfiles is just an alias for git
+alias dotfiles="git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME"
+alias dfls="dotfiles"
