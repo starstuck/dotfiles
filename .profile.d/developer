@@ -1,0 +1,15 @@
+#  -*- mode: sh -*-
+# Load developer utilities installed locally in workspace
+
+WORKSPACE=${WORKSPACE:-~/Developer}
+
+for D in "$WORKSPACE"/language-servers/* "$WORKSPACE"/*
+do
+  if [ -f "$D"/enable ]; then
+    source "$D"/enable
+  elif [ -d "$D"/bin ]; then
+    PATH="$D/bin:$PATH"
+  fi
+done
+export PATH
+    
