@@ -14,6 +14,12 @@
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 
+;; Use visible bell rather than audible
+(setq visible-bell t)
+
+;; Map righr CMD to Control, this helps a lot with mac laptop keyboards
+(setq ns-right-command-modifier 'control)
+
 ;; Place backup files in the user home directory
 (defconst emacs-backup-directory "~/.emacs.d/backups")
 (setq backup-directory-alist
