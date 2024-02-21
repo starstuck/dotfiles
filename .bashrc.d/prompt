@@ -36,7 +36,7 @@ PS_SUFFIX="\n\$ "
 
 # If this is an xterm set the window title to user@host:dir
 if [[ "$TERM" =~ xterm.*|rxvt.* ]]; then
-    PS_PREFIX="\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a${PS_PREFIX}"
+    PS_PREFIX="\e]0;${debian_chroot:+($debian_chroot)}\u@\h \W\a${PS_PREFIX}"
 fi
 
 # Use git prompt if it is avaialble
