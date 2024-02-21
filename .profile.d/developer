@@ -10,6 +10,10 @@ do
   elif [ -d "$D"/bin ]; then
     PATH="$D/bin:$PATH"
   fi
+  # Check if utility provides bash completions too
+  if [ -d "$D"/etc/bash_completion.d ]; then
+    BASH_COMPLETION="${D}/etc/bash_completion.d:${BASH_COMPLETION}"
+  fi
 done
 export PATH
-    
+export BASH_COMPLETION="${BASH_COMPLETION%:}"
