@@ -3,16 +3,15 @@
 # Workaround for older bash versions, which does not support compopt utility.
 # It make break some completions, but at least they will load and there is chance
 # that some basic features will still work
-if ! command -v compopt
+if ! (command -v compopt >/dev/null)
 then
   compopt () {
     :
   }
 fi
 
-load_completions()
+load_completion()
 {
-  echo "Loading completions from $1"
   local COMPLETION_DIR="$1"
   for i in $(LC_ALL=C command ls "$COMPLETION_DIR"); do
     [[ (! ${i##*/} =~ (^\.#|\.(bak|swp)$) ) \
@@ -23,5 +22,5 @@ load_completions()
 
 for D in $(echo "$BASH_COMPLETION" | tr ":" "\n" )
 do
-  load_completions "$D"
+  load_completion "$D"
 done
