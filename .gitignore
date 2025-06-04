@@ -1,9 +1,2 @@
 /*
-!/.bashrc
-!/.bashrc.d
-!/.emacs.d
-/.emacs.d/*
-!/.emacs.d/config
-!/.emacs.d/lisp
-!/.profile
-!/.profile.d
+!/.config

@@ -1,0 +1,8 @@
+# -*- sh -*-
+
+# Cygwin specyfic tweaks
+if [ "$(uname -o 2>/dev/null)" = "Cygwin" ]; then
+    # Ignore /r in shell scripts with dos style line endings
+    set -o igncr
+    export SHELLOPTS
+fi

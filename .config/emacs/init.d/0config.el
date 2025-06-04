@@ -21,17 +21,13 @@
 (setq ns-right-command-modifier 'control)
 
 ;; Place backup files in the user home directory
-(defconst emacs-backup-directory "~/.emacs.d/backups")
+(defconst emacs-backup-directory (locate-user-emacs-file "backups"))
 (setq backup-directory-alist
       `((".*" . ,emacs-backup-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,emacs-backup-directory t)))
 (setq keep-old-versions 5)
 (setq create-lockfiles nil)
-
-;; Choose to save places in folder under ~/.emacs.d.
-;; You still need to enable it manually if you want to use it
-(setq save-place-file "~/.emacs.d/places")
 
 ;; Use aspell for spellchecking
 ;;(setq ispell-personal-dictionary "~/usr/etc/ispell.d/personal-english")
