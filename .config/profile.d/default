@@ -19,9 +19,6 @@ add_to_path /Applications/Postgres.app/Contents/Versions/9.6/bin
 add_to_path "$HOME/.gem/ruby/$(ruby -e 'puts RUBY_VERSION' 2>/dev/null)/bin"
 export PATH
 
-# Setup configuration to be loaded by python interactive apps
-export PYTHONSTARTUP="$HOME/usr/etc/pythonrc"
-
 # Use emacs as default editor, supporting server mode
 if [ -n "$(which emacsclient 2>/dev/null)" ]; then
   export EDITOR="emacsclient --tty"
