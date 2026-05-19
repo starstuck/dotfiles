@@ -1,6 +1,4 @@
-;;-----------------------------------------------------------------------------
-;; emacs configuration
-;;-----------------------------------------------------------------------------
+;;; 0config.el --- early initialization -*- lexical-binding: t; -*-
 
 ;; Enable transparency
 ;; (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
@@ -14,8 +12,14 @@
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 
-;; Use visible bell rather than audible
-(setq visible-bell t)
+;; Use subtle bell - modeline flash
+(setq ring-bell-function
+      (lambda ()
+        (let ((orig (face-background 'mode-line)))
+          (set-face-background 'mode-line "#3b4252")
+          (run-at-time 0.1 nil
+                       (lambda ()
+                         (set-face-background 'mode-line orig))))))
 
 ;; Map righr CMD to Control, this helps a lot with mac laptop keyboards
 (setq ns-right-command-modifier 'control)
